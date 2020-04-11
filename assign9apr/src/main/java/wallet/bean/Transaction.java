@@ -2,13 +2,15 @@ package wallet.bean;
 
 public class Transaction {
 	private String accountId;
+	private String transactionType;
 	private int accountAmount;
 	private int accountBalance;
 	private String timeStamp;
 	
 	public Transaction(){};
-	public Transaction(String accountId, int accountAmount, int accountBalance, String timeStamp) {
+	public Transaction(String accountId,String transactionType, int accountAmount, int accountBalance, String timeStamp) {
 		this.accountId = accountId;
+		this.transactionType = transactionType;
 		this.accountAmount = accountAmount;
 		this.accountBalance = accountBalance;
 		this.timeStamp = timeStamp;
@@ -18,6 +20,13 @@ public class Transaction {
 	}
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
+	}
+	
+	public String getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 	public int getAccountAmount() {
 		return accountAmount;
@@ -39,9 +48,10 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transaction [accountId=" + accountId + ", accountAmount=" + accountAmount + ", accountBalance="
-				+ accountBalance + ", timeStamp=" + timeStamp + "]";
+		return "Transaction [accountId=" + accountId + ", transactionType=" + transactionType + ", accountAmount="
+				+ accountAmount + ", accountBalance=" + accountBalance + ", timeStamp=" + timeStamp + "]";
 	}
+	
 	
 	
 	

@@ -33,7 +33,7 @@ public class AccountDaoImpl implements AccountDao {
 	public int withdraw(Account account, int amount) {
 
 		int accountBalance = 0;
-
+		String type = "debited";
 		accountBalance = getAccountById(account.getAccountId()).getAccountBalance() - amount;
 		if (accountBalance < amount) {
 			System.out.println("Insufficient amount");
@@ -41,8 +41,8 @@ public class AccountDaoImpl implements AccountDao {
 		account.setAccountBalance(accountBalance);
 		String sql = "UPDATE account1 SET balance='"+accountBalance+"' WHERE id='"+account.getAccountId()+"'";
 		int jdbc = jdbcTemplate.update(sql);
-		String query = "insert into transactions values('"+account.getAccountId()+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
-		int transaction = jdbcTemplate.update(query);
+		String query = "insert into transactions values('"+account.getAccountId()+"','"+type+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
+		jdbcTemplate.update(query);
 		return jdbc;
 	}
 
@@ -74,13 +74,13 @@ public class AccountDaoImpl implements AccountDao {
 
 	public int deposit(Account account, int amount) {
 		int accountBalance = 0;
-
+		String type = "credited";
 		accountBalance = getAccountById(account.getAccountId()).getAccountBalance() + amount;
 		account.setAccountBalance(accountBalance);
 		String sql = "UPDATE account1 SET balance='"+accountBalance+"' WHERE id='"+account.getAccountId()+"'";
 		int jdbc = jdbcTemplate.update(sql);
-		String query = "insert into transactions values('"+account.getAccountId()+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
-		int transaction = jdbcTemplate.update(query);
+		String query = "insert into transactions values('"+account.getAccountId()+"','"+type+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
+		jdbcTemplate.update(query);
 		return jdbc;
 	}
 
@@ -117,9 +117,10 @@ public class AccountDaoImpl implements AccountDao {
 			public Transaction mapRow(ResultSet rs, int rn) throws SQLException {
 				Transaction trans=new Transaction();
 				trans.setAccountId(rs.getString(1));
-				trans.setAccountAmount(rs.getInt(2));
-				trans.setAccountBalance(rs.getInt(3));
-				trans.setTimeStamp(rs.getString(4));
+				trans.setTransactionType(rs.getString(2));
+				trans.setAccountAmount(rs.getInt(3));
+				trans.setAccountBalance(rs.getInt(4));
+				trans.setTimeStamp(rs.getString(5));
 				return trans;
 			}
 			
