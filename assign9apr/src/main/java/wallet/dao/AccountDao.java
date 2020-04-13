@@ -11,7 +11,7 @@ import wallet.bean.Transaction;
 
 public interface AccountDao {
 
-public void setJdbcTemplate(JdbcTemplate jdbcTemplate);
+//public void setJdbcTemplate(JdbcTemplate jdbcTemplate);
 	
 	public int saveAccount(Account account);
 	public int withdraw(Account account, int amount);

@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
 
 import wallet.bean.Account;
 import wallet.bean.Transaction;
 
 public class AccountDaoImpl implements AccountDao {
-
+	
 	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -24,10 +24,9 @@ public class AccountDaoImpl implements AccountDao {
 
 	public int saveAccount(Account account) {
 
-		String sql = "INSERT into account1 VALUES('" + account.getAccountId() + "','"
-				+ account.getAccountName() + "','" + account.getAccountBalance() + "','" + account.getAccountPin()
-				+ "')";
-		return jdbcTemplate.update(sql);
+		String sql = "INSERT into account1 VALUES(?,?,?,?)";
+		return jdbcTemplate.update(sql, new Object[] { account.getAccountId(), account.getAccountName(),
+				account.getAccountBalance(), account.getAccountPin() });
 	}
 
 	public int withdraw(Account account, int amount) {
@@ -39,17 +38,17 @@ public class AccountDaoImpl implements AccountDao {
 			System.out.println("Insufficient amount");
 		}
 		account.setAccountBalance(accountBalance);
-		String sql = "UPDATE account1 SET balance='"+accountBalance+"' WHERE id='"+account.getAccountId()+"'";
-		int jdbc = jdbcTemplate.update(sql);
-		String query = "insert into transactions values('"+account.getAccountId()+"','"+type+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
-		jdbcTemplate.update(query);
+		String sql = "UPDATE account1 SET balance= ? WHERE id= ?";
+		int jdbc = jdbcTemplate.update(sql, new Object[] { accountBalance, account.getAccountId() });
+		String query = "insert into transactions values(?,?,?,?,CURRENT_TIMESTAMP())";
+		jdbcTemplate.update(query, new Object[] { account.getAccountId(), type, amount, accountBalance });
 		return jdbc;
 	}
 
 	public Account getAccountById(String accountId) {
-		
-		String sql = "SELECT * FROM account1 WHERE id = ?"; 
-		return jdbcTemplate.queryForObject(sql, new Object[] {accountId}, new RowMapper<Account>() {
+
+		String sql = "SELECT * FROM account1 WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[] { accountId }, new RowMapper<Account>() {
 
 			public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Account account = new Account();
@@ -59,7 +58,7 @@ public class AccountDaoImpl implements AccountDao {
 				account.setAccountPin(rs.getString("pin"));
 				return account;
 			}
-			
+
 		});
 	}
 
@@ -68,10 +67,10 @@ public class AccountDaoImpl implements AccountDao {
 		String type = "credited";
 		accountBalance = getAccountById(account.getAccountId()).getAccountBalance() + amount;
 		account.setAccountBalance(accountBalance);
-		String sql = "UPDATE account1 SET balance='"+accountBalance+"' WHERE id='"+account.getAccountId()+"'";
-		int jdbc = jdbcTemplate.update(sql);
-		String query = "insert into transactions values('"+account.getAccountId()+"','"+type+"','"+amount+"','"+accountBalance+"',CURRENT_TIMESTAMP())";
-		jdbcTemplate.update(query);
+		String sql = "UPDATE account1 SET balance= ? WHERE id= ?";
+		int jdbc = jdbcTemplate.update(sql, new Object[] { accountBalance, account.getAccountId() });
+		String query = "insert into transactions values(?,?,?,?,CURRENT_TIMESTAMP())";
+		jdbcTemplate.update(query, new Object[] { account.getAccountId(), type, amount, accountBalance });
 		return jdbc;
 	}
 
@@ -102,11 +101,11 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	public List<Transaction> transaction(String accountId) {
-		String sql = "SELECT * FROM transactions WHERE id='"+accountId+"' ORDER BY ts DESC limit 5";
-		List<Transaction> transaction=jdbcTemplate.query(sql,new RowMapper<Transaction>(){
+		String sql = "SELECT * FROM transactions WHERE id='" + accountId + "' ORDER BY ts DESC limit 5";
+		List<Transaction> transaction = jdbcTemplate.query(sql, new RowMapper<Transaction>() {
 
 			public Transaction mapRow(ResultSet rs, int rn) throws SQLException {
-				Transaction trans=new Transaction();
+				Transaction trans = new Transaction();
 				trans.setAccountId(rs.getString(1));
 				trans.setTransactionType(rs.getString(2));
 				trans.setAccountAmount(rs.getInt(3));
@@ -114,7 +113,7 @@ public class AccountDaoImpl implements AccountDao {
 				trans.setTimeStamp(rs.getString(5));
 				return trans;
 			}
-			
+
 		});
 		return transaction;
 	}
