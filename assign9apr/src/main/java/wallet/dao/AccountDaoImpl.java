@@ -47,29 +47,20 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	public Account getAccountById(String accountId) {
-		Account account = null;
-		try {
-			java.sql.Connection connection = wallet.util.DBUtil.getConnection();
+		
+		String sql = "SELECT * FROM account1 WHERE id = ?"; 
+		return jdbcTemplate.queryForObject(sql, new Object[] {accountId}, new RowMapper<Account>() {
 
-			String sql = "SELECT * FROM account1 WHERE id='" + accountId + "'";
-			java.sql.Statement statement = connection.createStatement();
-			java.sql.ResultSet result = statement.executeQuery(sql);
-			if (result.next()) {
-				String name = result.getString(2);
-				int balance = result.getInt(3);
-				String pin = result.getString(4);
-				account = new Account(accountId, name, balance, pin);
-			} else {
-				System.out.println("Account with id:" + accountId + "not Found!");
+			public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Account account = new Account();
+				account.setAccountId(rs.getString("id"));
+				account.setAccountName(rs.getString("name"));
+				account.setAccountBalance(rs.getInt("balance"));
+				account.setAccountPin(rs.getString("pin"));
+				return account;
 			}
-			connection.close();
-		} catch (ClassNotFoundException cnfe) {
-			System.err.println(cnfe.getMessage());
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-
-		return account;
+			
+		});
 	}
 
 	public int deposit(Account account, int amount) {
