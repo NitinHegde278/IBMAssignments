@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dropbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <!-- Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <style>
+        
+        .logo img{
+            width: 90px;
+        }
+       blockquote {
+           margin-top: 120px;
+           margin-left: 10%;
+            width: 80%;
+        }
+       .h2{
+            width: 80%;
+            margin-left: 10%;
+        }
+        #top a{
+            font-size: 20px;
+            padding: 10px;
+            float: right;
+        }
+        #signin{
+            margin-top: 20%;
+        }
+        fieldset{
+            margin-left: 20px;
+            width: 80%;
+        }
+        form button{
+            width: 80%;
+        }
+    </style>
+        <div class="row">
+            <div class="col-md-8 text-center" style=" background-color: cornflowerblue;height: 1000px;">
+                <div class="logo float-left">
+                    <img src="images/hiclipart.com.png" class="img-fluid" alt="logo">
+            </div>
+            <div class="btn-group float-right" role="group">
+                <button type="button" class="btn btn-link text-light">Home</button>
+                <button type="button" class="btn btn-link text-light">About</button>
+                <button type="button" class="btn btn-link text-light">Contact</button>
+                </div>
+               
+                <blockquote class="display-2 text-light text-center"><strong>Exciting Products , awesome shopping experience</strong></blockquote>
+                <div class="h2 text-center text-light">Online Shopping platform which gives wide varities of products to choose from...</div>
+            </div>
+            <div id="second" class="col-md-4" style="height: 1000px;">
+                <div id="top">
+                <a href="#">Sign In</a>
+                <a href="#">Register</a>
+            </div>
+                <div id="signin" class="display-4">SignUp</div>
+                <div class="h5"><a href="#">or register here</a></div><br><br>
+                <form action="#">
+                    <fieldset class="form-group">
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Your Name">
+                    </fieldset>
+                    <fieldset class="form-group">
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Id">
+                        </fieldset>
+                    <fieldset class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        
+                        <p class="text-center">This page is protected by reCaptcha</p>
+                        <fieldset class="form-group">
+                        <input type="checkbox" name="check">I agree to terms and conditions.<br>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+            </div>
+        </div>
+  
+</body>
+</html>

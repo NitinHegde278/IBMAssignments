@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Validating Forms with JS</title>
+</head>
+<body>
+	<style type="text/css">
+		span{
+			color: red;
+		} 
+	</style>
+<form action="processData.html" onsubmit="return validateData();">
+	<input type="text" id="userName" placeholder="Your Name"><span id="nameError"></span><br>
+	<input type="text" id="userAddress" placeholder="Your Address"><span id="addressError"></span><br>
+	<input type="text" id="userPhone" placeholder="Your Phone"><span id="phoneError"></span><br>
+	<input type="email" id="userEmail" placeholder="Your Email"><span id="emailError"></span><br>
+	<input type="radio" name="gender" value="Male">Male
+	<input type="radio" name="gender" value="Female">Female
+	<input type="radio" name="gender" value="no">Prefer not to say<span id="genderError"></span><br>
+	<input type="checkbox" name="qualification" value="10">10th
+	<input type="checkbox" name="qualification" value="12">12th
+	<input type="checkbox" name="qualification" value="btech">B.Tech<span id="qualifError"></span><br>
+	<select id="country">
+		<option>select a country</option>
+		<option>USA</option>
+		<option>India</option>
+		<option>Russia</option>
+		<option>Mexico</option>
+	</select><span id="countryError"></span><br>
+	<input type="submit" value="REGISTER">
+</form>
+
+
+
+<script type="text/javascript">
+	function validateData(){
+		var userName = document.getElementById("userName");
+		var nameError = document.getElementById("nameError");
+		var userAddress = document.getElementById("userAddress");
+		var addressError = document.getElementById("addressError");
+		var userPhone = document.getElementById("userPhone");
+		var phoneError = document.getElementById("phoneError");
+		var userEmail = document.getElementById("userEmail");
+		var emailError = document.getElementById("emailError");
+		var gender = document.getElementsByName("gender");
+		var genderError = document.getElementById("genderError");
+		var qualification = document.getElementsByName("qualification");
+		var qualifError = document.getElementById("qualifError");
+		var country = document.getElementById("country");
+		var countryError = document.getElementById("countryError");
+		nameError.innerHTML="";
+		addressError.innerHTML="";
+		phoneError.innerHTML="";
+		emailError.innerHTML="";
+		genderError.innerHTML="";
+		qualifError.innerHTML="";
+		countryError.innerHTML="";
+		if(userName.value == ""){
+			nameError.innerHTML=" *Name field can't be empty";
+			userName.value = "";
+			userName.focus();
+			return false;
+		}
+		else if(!isNaN(userName.value)){
+			nameError.innerHTML=" *Names can't include digits";
+			userName.value = "";
+			userName.focus();
+			return false;
+		}
+		else if(!userAddress.value.length){
+			addressError.innerHTML=" *Please Enter the Address";
+			userAddress.focus();
+			return false;
+		}
+
+		else if(!userPhone.value.length){
+			phoneError.innerHTML=" *Phone Number is required";
+			userPhone.focus();
+			return false;
+		}
+		else if(isNaN(userPhone.value)){
+			phoneError.innerHTML=" *Please enter the correct phone number";
+			userPhone.value = "";
+			userPhone.focus();
+			return false;
+		}
+		else if(!userEmail.value.length){
+			emailError.innerHTML=" *Email address can't be empty";
+			userEmail.focus();
+			return false;
+		}
+		else if(!((gender[0].checked == true) || (gender[1].checked == true) || (gender[2].checked == true))){
+			genderError.innerHTML=" *Gender field can't be empty"
+			return false;
+		}
+		else if(!((qualification[0].checked == true) || (qualification[1].checked == true) || (qualification[2].checked == true))){
+			qualifError.innerHTML=" *Atleast 1 should be checked"
+			return false;
+		}
+		else if(country.value == "select a country"){
+			countryError.innerHTML=" *Country not selected";
+			country.focus();
+			return false;
+		}
+		
+		return true;
+
+
+	}
+</script>
+
+</body>
+</html>

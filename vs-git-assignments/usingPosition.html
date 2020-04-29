@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Talking about CSS Position</title>
+</head>
+<body>
+<style type="text/css">
+	header{
+		width: 100%;
+		height: 10%;
+		position: fixed;
+		background-color: darkgoldenrod;
+		 top: 0px;
+		left: 0px; 
+	}
+	#base header ul{
+		list-style: none;
+		background-color: darkgoldenrod;
+
+	}
+	#base header ul li{
+		float: right;
+	}
+	#base header ul li a{
+		text-decoration: none;
+		color: #fff;
+		padding: 18px 20px 20px 20px;
+		font-size: 28px;
+		display: block;
+		transition: .4s all ease;
+		/* border: 1px solid #fff; */
+	}
+	#base header ul li a:hover{
+		background-color: rgb(250, 181, 8);
+	}
+
+	#base{
+		width: 100%;
+		height: 700px;
+		background-color: red;
+	}
+	#container{
+		margin-top: 62px;
+		background-color: khaki;
+		float: left;
+		width: 15%;
+		height: 100%;
+	}
+	section{
+	
+		margin-top: 62px;
+		width: 85%;
+		height: 100%;
+		float: right;
+		background-color: #5b6633;
+	}
+	#sectionBody{
+		width: 100%;
+		height: 1000px;
+		
+	}
+	#icon{
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		transition: 5s all ease-in;
+		/* top: 5px;
+		left: 5px; */
+	}
+	#icon:hover{
+		margin-left: 70%;
+	}
+	nav{
+		width: 100%;
+		height: 100%;
+		background-color: #bd4112;	
+		
+	}
+	nav > ul{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	nav > ul > li > a{
+		text-decoration: none;
+		color: #fff;
+		padding: 15px 20px;
+		font-size: 28px;
+		display: block;
+		transition: .4s all ease;
+		border-bottom: 1px solid #fff;
+	}
+	nav > ul > li > a:hover{
+		background-color: #bd1002;
+	}
+	footer{
+		width: 100%;
+		height: 10%;
+		background-color: #080705;
+		font-family: sans-serif;
+		color: aliceblue;
+		/* padding-left: 45%; */
+	}
+	section ul li img{
+		width: 600px;
+		height: 500px;
+	}
+	section ul li{
+		list-style-type: none;
+		float: left;
+		width: 80px;
+		overflow: hidden;
+		transition: 2s all ease;
+	}
+	section ul li:hover{
+        width: 600px;
+	}
+	
+	
+</style>
+
+<div id="base">
+	<header>
+		<img id="icon" src="images/hiclipart.com.png">
+		<ul>
+			<li><a href="#">Wishlist</a></li>
+			<li><a href="#">Cart</a></li>
+		</ul>
+	</header>
+	<div id="sectionBody">
+		<div id="container">
+			<nav>
+				<ul>
+					<li><a href="#">Electronics</a></li>
+					<li><a href="#">Accessories</a></li>
+					<li><a href="#">LifeStyle</a></li>
+					<li><a href="#">Clothing</a></li>
+					<li><a href="#">Skin-Care</a></li>
+				</ul>
+			</nav>
+		</div>
+		<section>
+<ul>
+	<li><img src="images/slide1.jpg" alt="Image couldn't be loaded"></li>
+	<li><img src="images/slide2.jpg" alt="Image couldn't be loaded"></li>
+	<li><img src="images/slide5.jpg" alt="Image couldn't be loaded"></li>
+	<li><img src="images/slide3.jpg" alt="Image couldn't be loaded"></li>
+	<li><img src="images/slide4.png" alt="Image couldn't be loaded"></li>
+</ul>		
+</section>
+	</div>
+	<footer>
+		@Copyrights reserved
+	</footer>
+</div>
+</body>
+</html>
